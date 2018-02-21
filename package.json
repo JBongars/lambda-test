@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/JBongars/lambda-test/issues"
   },
-  "homepage": "https://github.com/JBongars/lambda-test#readme"
+  "homepage": "https://github.com/JBongars/lambda-test#readme",
+  "dependencies": {
+    "aws-sdk": "^2.199.0"
+  }
 }
