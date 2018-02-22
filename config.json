@@ -1,5 +1,4 @@
 {
-    "AUTH_CLIENT_ID": "AKIAIBDXTQB3Z2XUXECA",
-    "AUTH_CLIENT_SECRET": "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",
-    "WORKING_BUCKET": "working-bucket-67e482d5-4810-47d3-85b4-0cbe9325b35b"
+    "WORKING_BUCKET_NEW": "working-bucket-67e482d5-4810-47d3-85b4-0cbe9325b35b",
+    "WORKING_BUCKET": "working-bucket-23"
 }

@@ -1,9 +1,10 @@
 'use strict';
 
-const aws = require('aws-sdk');
-const async = require('async');
+//const aws = require('aws-sdk');
 
-var s3 = new aws.S3();
+//var s3 = new aws.S3();
+
+console.log('init service!');
 
 module.exports.hello = (event, context, callback) => {
     const response = {
@@ -18,6 +19,7 @@ module.exports.hello = (event, context, callback) => {
 };
 
 module.exports.uploadImage = (event, context, callback) => {
-    console.log('resizing image!');
-    //callback(null, 'touched!');
+    console.log('event: ', event);
+    console.log('context: ', context);
+    callback(null, {});
 }

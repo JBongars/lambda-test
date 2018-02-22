@@ -4,9 +4,8 @@ service: lambda-test # NOTE: update this with your service name
 provider:
   name: aws
   runtime: nodejs6.10
-  enviroment:
-    AUTH0_CLIENT_ID: ${file(./config.json):AUTH_CLIENT_ID}
-    AUTH0_CLIENT_SECRET: ${file(./config.json):AUTH_CLIENT_SECRET}
+  stage: ${opt:stage, 'dev'}
+  memorySize: 512
 
 # you can add packaging information here
 #package:
@@ -18,30 +17,31 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  # Test function to ensure pack was deployed successfully
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: api/hello
-          method: get
 
-  # Primary Lambda that triggers upon upload to working bucket
+  # Resize Lambda
   uploadImage:
     handler: handler.uploadImage
     events:
-      - s3: 
-          bucket: ${file(./config.json):WORKING_BUCKET}
-          event: s3.ObjectCreated
+      - s3: ${self:provider.stage}-lambdatest
+      - http:
+          method: post
+          path: /api/resize-images
+          cors: true
+          integration: lambda
+          request:
+            #parameters:
+            #  querystrings:
+            #    source_url: true
+            #    resize_option: false
+            #    dest_s3_bucket: false
+            #    dest_s3_prefix: false
+          response:
+            template: $input.path('$')
+            statusCodes:
+              201:
+                pattern: 
 
 # Resources
-#resources:
-#  Resources:
-#    WorkingBucket:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: ${file(./config.json):WORKING_BUCKET}
-
 #  Outputs:
 #     NewOutput:
 #       Description: "Description for the output"
